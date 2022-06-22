@@ -14,7 +14,8 @@ SELECT `degrees`.`name` AS `degrees_name` , `departments`.`name` AS `departments
 FROM `degrees`
 INNER JOIN `departments`
 ON `degrees`.`department_id` = `departments`.`id`
-WHERE `departments`.`id` = 7;
+WHERE `departments`.`id` = 7
+AND `degrees`.`level` = 'magistrale';
 
 ____________________________________________________________________________________________
 
@@ -33,13 +34,13 @@ ________________________________________________________________________________
 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il
 relativo dipartimento, in ordine alfabetico per cognome e nome
 
-SELECT `students`.`name` , `students`.`surname` , `degrees`.`name` AS `degrees_name` , `degrees`.`level` , `degrees`.`address` , `degrees`.`email` , `degrees`.`website` , `departments`.`name` AS `departments_name` 
+SELECT `students`.`name` , `students`.`surname` , `degrees`.`name` AS `degree_name` , `degrees`.`level` , `degrees`.`address` , `degrees`.`email` , `degrees`.`website` , `departments`.`name` AS `department_name` 
 FROM `students` 
 JOIN `degrees` 
 ON `students`.`degree_id` = `degrees`.`id` 
 JOIN `departments` 
 ON `degrees`.`department_id` = `departments`.`id` 
-ORDER BY `students`.`name`, `students`.`surname` ASC;
+ORDER BY  `students`.`surname` , `students`.`name` ASC;
 ____________________________________________________________________________________________
 
 
