@@ -11,24 +11,17 @@
   // QUERY
   $sql = "SELECT `id`, `name` FROM `departments`;";
   $result = $conn->query($sql);
-  // var_dump($result);
 
   $departments = [];
 
   if ($result && $result->num_rows > 0) {
-    // abbiamo dei risultati nella query
-    while ($row = $result->fetch_assoc()) { // fetch_assoc serve per prendere una riga alla volta
-      // var_dump($row);
-      $curr_department = new Department($row["id"], $row["name"]);
-      $departments[] = $curr_department;
+    while ($row = $result->fetch_assoc()) {
+      $current_department = new Department($row["id"], $row["name"]);
+      $departments[] = $current_department;
     }
-    // var_dump($departments);
   } else if ($result) {
-    // query è andata a buon fine ma non ci sono risultati
-
+    echo "Query vuota";
   } else {
-    // query non è andata a buon fine
-    // vuol dire che c'è un errore di sintassi nella query
     echo "Query error";
     die();
   }
@@ -44,10 +37,13 @@
   <title>Lista Dipartimenti</title>
 </head>
 <body>
+
+  <h1>Lista dipartimenti</h1>
+
   <?php foreach($departments as $department) { ?>
     <div>
-      <h2><?php echo $department->name; ?></h2>
-      <a href="single-department.php?id<?php echo $department->id?>">ulteriori informazioni</a>
+      <h3><?php echo $department->name; ?></h3>
+      <a href="single-department.php?id=<?php echo $department->id?>">Ulteriori informazioni</a>
     </div>
   <?php } ?>
 </body>
